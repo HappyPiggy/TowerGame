@@ -17,16 +17,16 @@ public class SpawnPanel : MonoBehaviour
     #endregion
 
     #region 方法
-    //public void Show(GameModel gm, Vector3 createPosition, bool upSide)
-    //{
-    //    transform.position = createPosition;
-    //    for (int i = 0; i < m_Icons.Length; i++)
-    //    {
-    //        TowerInfo info = Game.Instance.StaticData.GetTowerInfo(i);
-    //        m_Icons[i].Load(gm, info, createPosition, upSide);
-    //    }
-    //    gameObject.SetActive(true);
-    //}
+    public void Show(GameModel gm, Vector3 createPosition, bool upSide)
+    {
+        transform.position = createPosition;
+        for (int i = 0; i < m_Icons.Length; i++)
+        {
+            TowerInfo info = Game.Instance.StaticData.GetTowerInfo(i);
+            m_Icons[i].Load(gm, info, createPosition, upSide);
+        }
+        gameObject.SetActive(true);
+    }
 
     public void Hide()
     {

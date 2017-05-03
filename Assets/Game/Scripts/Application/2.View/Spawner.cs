@@ -92,6 +92,52 @@ public class Spawner : View
         monster.Hp = 0;
     }
 
+    void map_OnTileClick(object sender, TileClickEventArgs e)
+    {
+        GameModel gm = GetModel<GameModel>();
+        //canhold属性：只判断是否为怪物行进路线
+        if (gm.IsPlaying && e.Tile.CanHold)
+        {
+            if (e.Tile.Data == null)
+            {
+                ShowCreateArgs arg = new ShowCreateArgs()
+                {
+                    Position = m_Map.GetPosition(e.Tile),
+                    UpSide = e.Tile.Y < Map.RowCount / 2
+                };
+                SendEvent(Consts.E_ShowCreate, arg);
+            }
+            else
+            {
+                ShowUpgradeArgs arg = new ShowUpgradeArgs()
+                {
+                    Tower = e.Tile.Data as Tower
+                };
+                SendEvent(Consts.E_ShowUpgrade, arg);
+            }
+        }
+        else
+        {
+            SendEvent(Consts.E_HidePopup);
+        }
+    }
+
+    void SpawnTower(Vector3 position, int towerID)
+    {
+       // 创建Tower
+        TowerInfo info = Game.Instance.StaticData.GetTowerInfo(towerID);
+        GameObject go = Game.Instance.ObjectPool.Spawn(info.PrefabName);
+      //  Tower tower = go.GetComponent<Tower>();
+        go.transform.position = position;
+
+        ////Tile里放入Tower信息
+        //Tile tile = m_Map.GetTile(position);
+        //tile.Data = tower;
+
+        ////初始化Tower
+        //tower.Load(towerID, tile);
+    }
+
     #endregion
 
     #region Unity回调
@@ -102,6 +148,7 @@ public class Spawner : View
     {
         AttentionEvents.Add(Consts.E_EnterScene);
         AttentionEvents.Add(Consts.E_SpawnMonster);
+        AttentionEvents.Add(Consts.E_SpawnTower);
     }
 
     public override void HandleEvent(string eventName, object data)
@@ -112,6 +159,9 @@ public class Spawner : View
                 SceneArgs e0 = data as SceneArgs;
                 if (e0.SceneIndex == 3)
                 {
+                    //获取地图组件
+                    m_Map = GetComponent<Map>();
+                    m_Map.OnTileClick += map_OnTileClick;
 
                     //获取数据
                     GameModel gModel = GetModel<GameModel>();
@@ -131,6 +181,12 @@ public class Spawner : View
             case Consts.E_SpawnMonster:
                 SpawnMonsterArgs e1 = data as SpawnMonsterArgs;
                 SpawnMonster(e1.MonsterType);
+                break;
+            case Consts.E_SpawnTower:
+                SpawnTowerArgs e2 = data as SpawnTowerArgs;
+                SpawnTower(e2.Position, e2.TowerID);
+                break;
+            default:
                 break;
         }
     }

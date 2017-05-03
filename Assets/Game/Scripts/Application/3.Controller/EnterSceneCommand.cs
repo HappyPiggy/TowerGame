@@ -27,6 +27,7 @@ class EnterSceneComand : Controller
                 //直接用Find方法找隐藏的物体找不到
                 //需要通过先找父物体在找子物体才能找到隐藏的物体
                 RegisterView(GameObject.Find("Map").GetComponent<Spawner>());
+                RegisterView(GameObject.Find("TowerPopup").GetComponent<TowerPopup>());
                 RegisterView(GameObject.Find("UIBoard").GetComponent<UIBoard>());
                 RegisterView(GameObject.Find("Canvas").transform.Find("UICountDown").GetComponent<UICountDown>());
                 RegisterView(GameObject.Find("Canvas").transform.Find("UICountDown").GetComponent<UICountDown>());

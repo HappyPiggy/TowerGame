@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.2f2</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -80,8 +82,12 @@
   <ItemGroup>
     <Compile Include="Assets\Game\Scripts\Application\1.Model\GameModel.cs" />
     <Compile Include="Assets\Game\Scripts\Application\1.Model\RoundModel.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\2.View\Popup\SellIcon.cs" />
     <Compile Include="Assets\Game\Scripts\Application\2.View\Popup\SpawnIcon.cs" />
     <Compile Include="Assets\Game\Scripts\Application\2.View\Popup\SpawnPanel.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\2.View\Popup\TowerPopup.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\2.View\Popup\UpgradeIcon.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\2.View\Popup\UpgradePanel.cs" />
     <Compile Include="Assets\Game\Scripts\Application\2.View\Spawner.cs" />
     <Compile Include="Assets\Game\Scripts\Application\2.View\UIBoard.cs" />
     <Compile Include="Assets\Game\Scripts\Application\2.View\UICard.cs" />
@@ -96,13 +102,20 @@
     <Compile Include="Assets\Game\Scripts\Application\3.Controller\EndLevelCommand.cs" />
     <Compile Include="Assets\Game\Scripts\Application\3.Controller\EnterSceneCommand.cs" />
     <Compile Include="Assets\Game\Scripts\Application\3.Controller\ExitSceneCommand.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\3.Controller\SellTowerCommand.cs" />
     <Compile Include="Assets\Game\Scripts\Application\3.Controller\StartLevelCommand.cs" />
     <Compile Include="Assets\Game\Scripts\Application\3.Controller\StartUpCommand.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\3.Controller\UpgradeTowerCommand.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Args\EndLevelArgs.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Args\SceneArgs.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Args\SellTowerArgs.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Args\ShowCreateArgs.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Args\ShowUpgradeArgs.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Args\SpawnMonsterArgs.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Args\SpawnTowerArgs.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Args\StartLevelArgs.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Args\StartRoundArgs.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Args\UpgradeTowerArgs.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Consts.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Data\Card.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Data\Level.cs" />
@@ -119,6 +132,7 @@
     <Compile Include="Assets\Game\Scripts\Application\Object\Map.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Object\Monster.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Object\Role.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Object\Tower.cs" />
     <Compile Include="Assets\Game\Scripts\Application\StaticData\LuoboInfo.cs" />
     <Compile Include="Assets\Game\Scripts\Application\StaticData\MonsterInfo.cs" />
     <Compile Include="Assets\Game\Scripts\Application\StaticData\StaticData.cs" />

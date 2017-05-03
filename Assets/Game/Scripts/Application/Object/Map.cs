@@ -162,6 +162,11 @@ public class Map : MonoBehaviour
     #region 事件回调
     void Map_OnTileClick(object sender, TileClickEventArgs e)
     {
+        //当前场景不是LevelBuilder不能编辑
+        if (gameObject.scene.name != "LevelBuilder")
+            return;
+
+
         if (Level == null)
             return;
 
@@ -326,7 +331,7 @@ public class Map : MonoBehaviour
     }
 
     //获取格子中心点所在的世界坐标
-    Vector3 GetPosition(Tile t)
+    public  Vector3 GetPosition(Tile t)
     {
 
         //X,Y是格子索引

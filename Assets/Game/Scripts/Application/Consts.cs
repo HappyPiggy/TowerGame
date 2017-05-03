@@ -29,6 +29,8 @@ public static class Consts
     public const string V_Sytem = "V_Sytem";
     public const string V_Complete = "V_Complete";
     public const string V_Spanwner = "V_Spanwner";
+    public const string V_TowerPopup = "V_TowerPopup";
+
 
     //Controller
     public const string E_StartUp = "E_StartUp";
@@ -43,7 +45,13 @@ public static class Consts
 
     public const string E_StartRound = "E_StartRound";//StartRoundArgs
     public const string E_SpawnMonster = "E_SpawnMonster";//SpawnMonsterArgs
+    public const string E_SpawnTower = "E_SpawnTower";//SpawnTowerArgs
+    public const string E_UpgradeTower = "E_UpgradeTower";//UpgradeTowerArgs
+    public const string E_SellTower = "E_SellTower";//SellTowerArgs
 
+    public const string E_ShowCreate = "E_ShowCreate";//ShowCreatorArgs
+    public const string E_ShowUpgrade = "E_ShowUpgrade";//ShowUpgradeArgs
+    public const string E_HidePopup = "E_HidePopup";
 
 }
 

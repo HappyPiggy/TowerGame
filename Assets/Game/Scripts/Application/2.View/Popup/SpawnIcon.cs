@@ -22,7 +22,8 @@ public class SpawnIcon : MonoBehaviour
         m_CreatePosition = createPostion;
 
         //是否足够
-        m_Enough = gm.Gold > info.BasePrice;
+        //m_Enough = gm.Gold > info.BasePrice;
+        m_Enough = true;
 
         //图标
         //TODO
@@ -38,14 +39,14 @@ public class SpawnIcon : MonoBehaviour
 
     void OnMouseDown()
     {
-        //if (!m_Enough)
-        //return;
+        if (!m_Enough)
+            return;
 
-        //SpawnTowerArgs e = new SpawnTowerArgs()
-        //{
-        //    Position = m_CreatePosition,
-        //    TowerID = m_Info.ID
-        //};
-        //SendMessageUpwards("SpawnTower", e, SendMessageOptions.DontRequireReceiver);
+        SpawnTowerArgs e = new SpawnTowerArgs()
+        {
+            Position = m_CreatePosition,
+            TowerID = m_Info.ID
+        };
+        SendMessageUpwards("SpawnTower", e, SendMessageOptions.DontRequireReceiver);
     }
 }
