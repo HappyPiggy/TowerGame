@@ -11,7 +11,7 @@ public class TowerInfo
     public string DisabledIcon;
     public int MaxLevel;
     public int BasePrice;
-    public int ShotRate;
+    public float ShotRate;
     public float GuardRange;
     public int UseBulletID;
 }

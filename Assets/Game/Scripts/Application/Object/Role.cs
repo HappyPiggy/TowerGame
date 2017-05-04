@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-abstract class Role : ReusbleObject, IReusable
+abstract public class Role : ReusbleObject, IReusable
 {
     #region 常量
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class Monster : Role
+public class Monster : Role
 {
     #region 常量
     public const float CLOSED_DISTANCE = 0.1f;

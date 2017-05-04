@@ -128,6 +128,8 @@
     <Compile Include="Assets\Game\Scripts\Application\Misc\Rotate.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Misc\Saver.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Misc\Tools.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Object\Bottle.cs" />
+    <Compile Include="Assets\Game\Scripts\Application\Object\Fan.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Object\Luobo.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Object\Map.cs" />
     <Compile Include="Assets\Game\Scripts\Application\Object\Monster.cs" />

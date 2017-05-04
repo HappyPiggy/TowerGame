@@ -124,18 +124,18 @@ public class Spawner : View
 
     void SpawnTower(Vector3 position, int towerID)
     {
-       // 创建Tower
+        //找到Tile
+        Tile tile = m_Map.GetTile(position);
+
+        //创建Tower
         TowerInfo info = Game.Instance.StaticData.GetTowerInfo(towerID);
         GameObject go = Game.Instance.ObjectPool.Spawn(info.PrefabName);
-      //  Tower tower = go.GetComponent<Tower>();
-        go.transform.position = position;
+        Tower tower = go.GetComponent<Tower>();
+        tower.transform.position = position;
+        tower.Load(towerID, tile);
 
-        ////Tile里放入Tower信息
-        //Tile tile = m_Map.GetTile(position);
-        //tile.Data = tower;
-
-        ////初始化Tower
-        //tower.Load(towerID, tile);
+        //设置Tile数据
+       // tile.Data = tower;
     }
 
     #endregion

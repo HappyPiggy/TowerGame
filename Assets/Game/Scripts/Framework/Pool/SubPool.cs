@@ -48,6 +48,8 @@ public class SubPool
         }
 
         go.SetActive(true);
+
+        //发送给自己
         go.SendMessage("OnSpawn", SendMessageOptions.DontRequireReceiver);
         return go;
     }

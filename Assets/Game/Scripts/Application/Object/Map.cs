@@ -356,6 +356,15 @@ public class Map : MonoBehaviour
         return m_grid[index];
     }
 
+    //重载
+    //获取所在位置获得格子
+    public Tile GetTile(Vector3 position)
+    {
+        int tileX = (int)((position.x + MapWidth / 2) / TileWidth);
+        int tileY = (int)((position.y + MapHeight / 2) / TileHeight);
+        return GetTile(tileX, tileY);
+    }
+
 
     //获取鼠标下面的格子
     Tile GetTileUnderMouse()
