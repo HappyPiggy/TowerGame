@@ -94,32 +94,47 @@ public class Spawner : View
 
     void map_OnTileClick(object sender, TileClickEventArgs e)
     {
+      //  print("123");
+
         GameModel gm = GetModel<GameModel>();
-        //canhold属性：只判断是否为怪物行进路线
-        if (gm.IsPlaying && e.Tile.CanHold)
+
+        //游戏还未开始，那么不操作菜单
+        if (!gm.IsPlaying)
+            return;
+
+        //如果有菜单显示，那么隐藏菜单
+
+        if (TowerPopup.Instance.IsPopShow)
         {
-            if (e.Tile.Data == null)
+            SendEvent(Consts.E_HidePopup);
+            return;
+        }
+
+        //非放塔格子，不操作菜单
+        if (!e.Tile.CanHold)
+        {
+            SendEvent(Consts.E_HidePopup);
+            return;
+        }
+
+        if (e.Tile.Data == null)
+        {
+            ShowCreateArgs arg = new ShowCreateArgs()
             {
-                ShowCreateArgs arg = new ShowCreateArgs()
-                {
-                    Position = m_Map.GetPosition(e.Tile),
-                    UpSide = e.Tile.Y < Map.RowCount / 2
-                };
-                SendEvent(Consts.E_ShowCreate, arg);
-            }
-            else
-            {
-                ShowUpgradeArgs arg = new ShowUpgradeArgs()
-                {
-                    Tower = e.Tile.Data as Tower
-                };
-                SendEvent(Consts.E_ShowUpgrade, arg);
-            }
+                Position = m_Map.GetPosition(e.Tile),
+                UpSide = e.Tile.Y < Map.RowCount / 2
+            };
+            SendEvent(Consts.E_ShowCreate, arg);
         }
         else
         {
-            SendEvent(Consts.E_HidePopup);
+            ShowUpgradeArgs arg = new ShowUpgradeArgs()
+            {
+                Tower = e.Tile.Data as Tower
+            };
+            SendEvent(Consts.E_ShowUpgrade, arg);
         }
+      
     }
 
     void SpawnTower(Vector3 position, int towerID)
@@ -132,10 +147,10 @@ public class Spawner : View
         GameObject go = Game.Instance.ObjectPool.Spawn(info.PrefabName);
         Tower tower = go.GetComponent<Tower>();
         tower.transform.position = position;
-        tower.Load(towerID, tile);
+        tower.Load(towerID, tile, m_Map.MapRect);
 
         //设置Tile数据
-       // tile.Data = tower;
+        tile.Data = tower;
     }
 
     #endregion

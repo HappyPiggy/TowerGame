@@ -114,7 +114,7 @@ public class GameModel : Model
     public void StartLevel(int levelIndex)
     {
         _mPlayLevelId = levelIndex;
-        m_isPlaying = true;
+       // m_isPlaying = true;
     }
 
     //游戏结束

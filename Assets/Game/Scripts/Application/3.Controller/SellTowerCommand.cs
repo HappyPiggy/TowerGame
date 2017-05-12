@@ -8,17 +8,17 @@ class SellTowerCommand : Controller
 {
     public override void Execute(object data)
     {
-        //SellTowerArgs e = Data as SellTowerArgs;
-        //Tower tower = e.tower;
+        SellTowerArgs e = data as SellTowerArgs;
+        Tower tower = e.tower;
 
-        ////清除Tile存储的信息
-        //tower.Tile.Data = null;
+        //清除Tile存储的信息
+        tower.Tile.Data = null;
 
-        ////半价出售
-        //GameModel gm = GetModel<GameModel>();
-        //gm.Gold += e.tower.Price / 2;
+        //半价出售
+        GameModel gm = GetModel<GameModel>();
+        gm.Gold += e.tower.Price / 2;
 
-        ////回收
-        //Game.Instance.ObjectPool.Unspawn(e.tower.gameObject);
+        //回收
+        Game.Instance.ObjectPool.Unspawn(e.tower.gameObject);
     }
 }

@@ -11,8 +11,11 @@ public static class Consts
     public static string MapDir = Application.dataPath + @"\Game\Resources\Res\Maps";
     public static string CardDir = Application.dataPath + @"\Game\Resources\Res\Cards";
 
-    //存档
+
+    //参数
     public const string GameProgress = "GameProgress";
+    public const float DotClosedDistance = 0.1f;
+    public const float RangeClosedDistance = 0.7f;
 
     //Model
     public const string M_GameModel = "M_GameModel";

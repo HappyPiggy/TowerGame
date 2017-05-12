@@ -7,8 +7,8 @@ class UpgradeTowerCommand : Controller
 {
     public override void Execute(object data)
     {
-        //UpgradeTowerArgs e = Data as UpgradeTowerArgs;
-        //Tower tower = e.tower;
-        //tower.Level++;
+        UpgradeTowerArgs e = data as UpgradeTowerArgs;
+        Tower tower = e.tower;
+        tower.Level++;
     }
 }

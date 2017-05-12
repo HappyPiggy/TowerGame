@@ -14,10 +14,32 @@ public class TowerPopup : View
     public UpgradePanel UpgradePanel;
     #endregion
 
+    private static TowerPopup m_Instance = null;
+    public static TowerPopup Instance
+    {
+        get
+        {
+            return m_Instance;
+        }
+    }
+
     #region 属性
     public override string Name
     {
         get { return Consts.V_TowerPopup; }
+    }
+
+    public bool IsPopShow
+    {
+        get
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.activeSelf)
+                    return true;
+            }
+            return false;
+        }
     }
     #endregion
 
@@ -93,6 +115,11 @@ public class TowerPopup : View
     #endregion
 
     #region Unity回调
+    void Awake()
+    {
+        m_Instance = this;
+    }
+
     #endregion
 
     #region 帮助方法

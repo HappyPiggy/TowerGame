@@ -4,26 +4,7 @@ using UnityEngine;
 
 public abstract class Tower : ReusbleObject
 {
-    #region 常量
-    #endregion
-
-    #region 事件
-
-    #endregion
-
-    #region 字段
-    Animator m_Animator;
-    [SerializeField]
-    int m_Level;
-    Monster m_Target = null;
-    float m_lastShotTime = 0;
-    #endregion
-
-    #region 属性
-    public Tile Tile { get; private set; }
-
     public int ID { get; private set; }
-
     public int Level
     {
         get { return m_Level; }
@@ -37,57 +18,22 @@ public abstract class Tower : ReusbleObject
     public bool IsTopLevel { get { return Level >= MaxLevel; } }
     public float ShotRate { get; private set; }
     public float GuardRange { get; private set; }
-    private int BasePrice { get; set; }
-    private int UseBulletID { get; set; }
+    public int BasePrice { get; private set; }
+    public int UseBulletID { get; private set; }
     public int Price { get { return BasePrice * Level; } }
-    #endregion
+    public Tile Tile { get; private set; }
+    public Rect MapRect { get; private set; }
 
-    #region 方法
-    public virtual void Load(int towerID, Tile tile)
-    {
-        TowerInfo info = Game.Instance.StaticData.GetTowerInfo(towerID);
-        MaxLevel = info.MaxLevel;
-        ShotRate = info.ShotRate;
-        BasePrice = info.BasePrice;
-        GuardRange = info.GuardRange;
-        UseBulletID = info.UseBulletID;
-        Level = 1;
+    Monster m_Target;
+    Animator m_Animator;
+    int m_Level;
+    float m_LastShotTime = 0;
 
-        Tile = tile;
-    }
-
-    protected virtual void Shot(Monster monster)
-    {
-        //print("test");
-        m_Animator.SetTrigger("IsAttack");
-    }
-
-    public override void OnSpawn()
+    protected virtual void Awake()
     {
         m_Animator = GetComponent<Animator>();
-        m_Animator.Play("Idle");
     }
 
-    public override void OnUnspawn()
-    {
-        
-        m_Animator = null;
-        m_Target = null;
-        m_lastShotTime = 0;
-
-        Tile = null;
-
-        Level = 0;
-        MaxLevel = 0;
-        ShotRate = 0;
-        BasePrice = 0;
-    }
-    #endregion
-
-    #region Unity回调
-    #endregion
-
-    #region 事件回调
     void Update()
     {
         if (m_Target == null)
@@ -116,20 +62,37 @@ public abstract class Tower : ReusbleObject
             //朝向目标
             LookAt(m_Target);
 
-            //
-            if (Time.time >= m_lastShotTime + 1f / ShotRate)
+            //发射判断
+            if (Time.time >= m_LastShotTime + 1f / ShotRate)
             {
                 //创建子弹
                 Shot(m_Target);
 
                 //记录发射时间
-                m_lastShotTime = Time.time;
+                m_LastShotTime = Time.time;
             }
         }
     }
-    #endregion
 
-    #region 帮助方法
+    public void Load(int towerID, Tile tile, Rect mapRect)
+    {
+        TowerInfo info = Game.Instance.StaticData.GetTowerInfo(towerID);
+        MaxLevel = info.MaxLevel;
+        ShotRate = info.ShotRate;
+        BasePrice = info.BasePrice;
+        GuardRange = info.GuardRange;
+        UseBulletID = info.UseBulletID;
+        Level = 1;
+
+        Tile = tile;
+        MapRect = mapRect;
+    }
+
+    public virtual void Shot(Monster monster)
+    {
+        m_Animator.SetTrigger("IsAttack");
+    }
+
     void LookAt(Monster target)
     {
         if (target == null)
@@ -145,7 +108,27 @@ public abstract class Tower : ReusbleObject
             Vector3 eulerAngles = transform.eulerAngles;
             eulerAngles.z = angle * Mathf.Rad2Deg - 90;
             transform.eulerAngles = eulerAngles;
+          //  transform.LookAt(target.transform.position,Vector3.forward);
         }
     }
-    #endregion
+
+    public override void OnSpawn()
+    {
+
+    }
+
+    public override void OnUnspawn()
+    {
+        m_Animator.ResetTrigger("IsAttack");
+        m_Animator.Play("Idle");
+        m_Target = null;
+        m_LastShotTime = 0;
+
+        Tile = null;
+
+        Level = 0;
+        MaxLevel = 0;
+        ShotRate = 0;
+        BasePrice = 0;
+    }
 }
